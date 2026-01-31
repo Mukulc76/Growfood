@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growfood | Fresh Polyhouse Vegetables</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-deep: #1a3d2e;
+            --green-forest: #2d5a47;
+            --green-leaf: #4a7c59;
+            --green-fresh: #7cb083;
+            --cream: #faf8f3;
+            --cream-dark: #f0ebe0;
+            --orange-pepper: #e86a33;
+            --yellow-pepper: #f2c94c;
+            --red-pepper: #c93c3c;
+            --cucumber: #6b8e4e;
+            --text-dark: #1a1a1a;
+            --text-muted: #5a5a5a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.25rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(250, 248, 243, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 30px rgba(0,0,0,0.08);
+        }
+
+        .logo {
+            font-family: 'Fraunces', serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--green-deep);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-leaf {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--green-leaf), var(--green-fresh));
+            border-radius: 50% 0 50% 50%;
+            transform: rotate(-45deg);
+            position: relative;
+        }
+
+        .logo-leaf::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 60%;
+            background: var(--cream);
+            left: 50%;
+            bottom: 10%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--green-deep);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--green-fresh);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 2px;
+            background: var(--green-deep);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--green-forest) 0%, var(--green-deep) 100%);
+            clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+            z-index: -1;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--green-fresh);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            color: var(--green-deep);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 1s ease 0.3s backwards;
+        }
+
+        .hero h1 span {
+            color: var(--green-leaf);
+            font-style: italic;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.5s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--green-deep);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--green-forest);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(26, 61, 46, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--green-deep);
+            border: 2px solid var(--green-deep);
+        }
+
+        .btn-secondary:hover {
+            background: var(--green-deep);
+            color: white;
+        }
+
+        .hero-illustration {
+            position: absolute;
+            right: 8%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 400px;
+            height: 400px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%); }
+            50% { transform: translateY(calc(-50% - 20px)); }
+        }
+
+        .vegetable-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .vegetable-icon {
+            position: absolute;
+            font-size: 4rem;
+            animation: bounce 3s ease-in-out infinite;
+        }
+
+        .vegetable-icon:nth-child(1) {
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation-delay: 0s;
+        }
+
+        .vegetable-icon:nth-child(2) {
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 0.5s;
+        }
+
+        .vegetable-icon:nth-child(3) {
+            bottom: 20%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 5%;
+            background: white;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            color: var(--green-leaf);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--green-deep);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-card {
+            background: var(--cream);
+            padding: 2.5rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--green-fresh), var(--green-leaf));
+        }
+
+        .about-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--green-leaf), var(--green-fresh));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .about-card h3 {
+            font-size: 1.4rem;
+            color: var(--green-deep);
+            margin-bottom: 1rem;
+        }
+
+        .about-card p {
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 8rem 5%;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+        }
+
+        .product-image {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:nth-child(1) .product-image {
+            background: linear-gradient(135deg, #ffe5d9 0%, #ffd4c4 100%);
+        }
+
+        .product-card:nth-child(2) .product-image {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+        }
+
+        .product-card:nth-child(3) .product-image {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+        }
+
+        .product-emoji {
+            font-size: 6rem;
+            transition: transform 0.4s ease;
+        }
+
+        .product-card:hover .product-emoji {
+            transform: scale(1.15) rotate(-5deg);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--green-leaf);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-content {
+            padding: 1.75rem;
+        }
+
+        .product-content h3 {
+            font-size: 1.5rem;
+            color: var(--green-deep);
+            margin-bottom: 0.75rem;
+        }
+
+        .product-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
+        }
+
+        .product-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .product-feature {
+            background: var(--cream);
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--green-forest);
+            font-weight: 500;
+        }
+
+        /* Quality Section */
+        .quality {
+            padding: 8rem 5%;
+            background: var(--green-deep);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quality::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.04;
+        }
+
+        .quality .section-header {
+            position: relative;
+            z-index: 1;
+        }
+
+        .quality .section-tag {
+            color: var(--green-fresh);
+        }
+
+        .quality .section-header h2 {
+            color: white;
+        }
+
+        .quality .section-header p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .quality-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .quality-item {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .quality-number {
+            font-family: 'Fraunces', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--green-fresh);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .quality-label {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quality-desc {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Location Section */
+        .location {
+            padding: 8rem 5%;
+            background: white;
+        }
+
+        .location-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .location-content h2 {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            color: var(--green-deep);
+            margin-bottom: 1.5rem;
+        }
+
+        .location-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--cream);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h4 {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            color: var(--green-deep);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-details span {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .location-map {
+            background: var(--cream);
+            border-radius: 24px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-placeholder {
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .map-placeholder svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 1rem;
+            color: var(--green-leaf);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--green-deep);
+            padding: 4rem 5% 2rem;
+            color: white;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-brand .logo {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand .logo-leaf {
+            background: linear-gradient(135deg, var(--green-fresh), var(--green-leaf));
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            max-width: 300px;
+        }
+
+        .footer-links h4 {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-links ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--green-fresh);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.9rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: var(--green-fresh);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-bg {
+                width: 100%;
+                clip-path: polygon(0 60%, 100% 40%, 100% 100%, 0 100%);
+                opacity: 0.1;
+            }
+
+            .hero-illustration {
+                display: none;
+            }
+
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .hero p {
+                margin: 0 auto 2rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .location-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .about-grid,
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        .whatsapp-float::before {
+            content: 'Chat with us';
+            position: absolute;
+            right: 70px;
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-float:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .whatsapp-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #25D366;
+            animation: pulse 2s infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+            }
+
+            .whatsapp-float::before {
+                display: none;
+            }
+        }
+
+        /* Scroll animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo">
+            <div class="logo-leaf"></div>
+            Growfood
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#quality">Quality</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                100% Polyhouse Grown
+            </div>
+            <h1>Fresh from <span>Nature</span>, Grown with Care</h1>
+            <p>Premium quality bell peppers and cucumbers, cultivated in our state-of-the-art NVPH polyhouses. From our farm to your table, taste the difference of truly fresh produce.</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">Explore Products</a>
+                <a href="#contact" class="btn btn-secondary">Find Us</a>
+            </div>
+        </div>
+        <div class="hero-illustration">
+            <div class="vegetable-circle">
+                <span class="vegetable-icon">🫑</span>
+                <span class="vegetable-icon">🥒</span>
+                <span class="vegetable-icon">🌶️</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="section-header scroll-reveal">
+            <span class="section-tag">Who We Are</span>
+            <h2>Growing Excellence in Every Harvest</h2>
+            <p>At Growfood, we combine traditional farming wisdom with modern polyhouse technology to deliver the freshest, most nutritious vegetables to your table.</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-card scroll-reveal">
+                <div class="about-icon">🏠</div>
+                <h3>NVPH Technology</h3>
+                <p>Our Naturally Ventilated Polyhouses create the perfect microclimate for vegetable cultivation. Controlled temperature, optimal humidity, and protection from pests ensure consistent quality year-round.</p>
+            </div>
+            <div class="about-card scroll-reveal">
+                <div class="about-icon">🌱</div>
+                <h3>Sustainable Practices</h3>
+                <p>We believe in growing responsibly. Our polyhouses use efficient water management, natural ventilation, and integrated pest management to minimize environmental impact while maximizing quality.</p>
+            </div>
+            <div class="about-card scroll-reveal">
+                <div class="about-icon">✨</div>
+                <h3>Premium Quality</h3>
+                <p>Every vegetable that leaves our farm meets strict quality standards. We hand-select and carefully grade our produce to ensure you receive only the best, freshest vegetables.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-header scroll-reveal">
+            <span class="section-tag">Our Produce</span>
+            <h2>Farm Fresh Vegetables</h2>
+            <p>Discover our range of premium polyhouse-grown vegetables, cultivated with care and harvested at peak freshness.</p>
+        </div>
+        <div class="products-grid">
+            <div class="product-card scroll-reveal">
+                <div class="product-image">
+                    <span class="product-emoji">🫑</span>
+                    <span class="product-badge">Premium</span>
+                </div>
+                <div class="product-content">
+                    <h3>Coloured Bell Peppers</h3>
+                    <p>Vibrant red, yellow, and orange bell peppers with exceptional sweetness and crunch. Perfect for salads, stir-fries, and gourmet dishes.</p>
+                    <div class="product-features">
+                        <span class="product-feature">Sweet & Crisp</span>
+                        <span class="product-feature">Vitamin Rich</span>
+                        <span class="product-feature">Export Quality</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card scroll-reveal">
+                <div class="product-image">
+                    <span class="product-emoji">🌶️</span>
+                    <span class="product-badge">Fresh Daily</span>
+                </div>
+                <div class="product-content">
+                    <h3>Green Capsicum</h3>
+                    <p>Firm, glossy green capsicums with a mild, slightly bitter flavor. Ideal for stuffing, sautéing, or adding a fresh crunch to any meal.</p>
+                    <div class="product-features">
+                        <span class="product-feature">Firm Texture</span>
+                        <span class="product-feature">Versatile</span>
+                        <span class="product-feature">Nutrient Dense</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-card scroll-reveal">
+                <div class="product-image">
+                    <span class="product-emoji">🥒</span>
+                    <span class="product-badge">Hydrating</span>
+                </div>
+                <div class="product-content">
+                    <h3>Fresh Cucumber</h3>
+                    <p>Crisp, refreshing cucumbers grown in controlled conditions for consistent quality. Perfect for salads, raita, or simply enjoying fresh.</p>
+                    <div class="product-features">
+                        <span class="product-feature">Extra Crispy</span>
+                        <span class="product-feature">Low Calorie</span>
+                        <span class="product-feature">Refreshing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quality Section -->
+    <section class="quality" id="quality">
+        <div class="section-header">
+            <span class="section-tag">Our Commitment</span>
+            <h2>Quality You Can Trust</h2>
+            <p>We take pride in delivering vegetables that exceed expectations in freshness, taste, and nutritional value.</p>
+        </div>
+        <div class="quality-grid">
+            <div class="quality-item scroll-reveal">
+                <div class="quality-number">100%</div>
+                <div class="quality-label">Polyhouse Grown</div>
+                <div class="quality-desc">Protected cultivation for superior quality</div>
+            </div>
+            <div class="quality-item scroll-reveal">
+                <div class="quality-number">365</div>
+                <div class="quality-label">Days Fresh Supply</div>
+                <div class="quality-desc">Year-round availability guaranteed</div>
+            </div>
+            <div class="quality-item scroll-reveal">
+                <div class="quality-number">0%</div>
+                <div class="quality-label">Harmful Pesticides</div>
+                <div class="quality-desc">Safe for you and your family</div>
+            </div>
+            <div class="quality-item scroll-reveal">
+                <div class="quality-number">A+</div>
+                <div class="quality-label">Grade Quality</div>
+                <div class="quality-desc">Only the best reaches you</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="location" id="contact">
+        <div class="location-wrapper">
+            <div class="location-content scroll-reveal">
+                <h2>Visit Our Farm</h2>
+                <p>Want to see where your vegetables come from? We welcome visits to our polyhouse facility. Experience firsthand how we grow the freshest produce using modern, sustainable methods.</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h4>Farm Location</h4>
+                            <span>[Your Farm Address]<br>District, State - PIN Code</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <span>+91 XXXXX XXXXX</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">💬</div>
+                        <div class="contact-details">
+                            <h4>WhatsApp</h4>
+                            <span><a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Growfood!%20I%20would%20like%20to%20know%20more%20about%20your%20vegetables." style="color: #25D366; text-decoration: none; font-weight: 600;">Chat with us →</a></span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <span>contact@growfood.in</span>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕐</div>
+                        <div class="contact-details">
+                            <h4>Visiting Hours</h4>
+                            <span>Mon - Sat: 9:00 AM - 5:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="location-map scroll-reveal">
+                <div class="map-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <p>Map will be embedded here<br><small>Add Google Maps iframe for your location</small></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <div class="logo-leaf"></div>
+                    Growfood
+                </a>
+                <p>Growing premium quality vegetables in our NVPH polyhouses. Fresh, nutritious, and sustainable produce for a healthier tomorrow.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#products">Our Products</a></li>
+                    <li><a href="#quality">Quality Promise</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#products">Bell Peppers</a></li>
+                    <li><a href="#products">Green Capsicum</a></li>
+                    <li><a href="#products">Cucumbers</a></li>
+                    <li><a href="#products">Coming Soon...</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 Growfood. All rights reserved.</span>
+            <div class="footer-social">
+                <a href="#" title="Facebook">f</a>
+                <a href="#" title="Instagram">ig</a>
+                <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Growfood!" target="_blank" rel="noopener noreferrer" title="WhatsApp" style="background: #25D366;">wa</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <!-- Replace 91XXXXXXXXXX with actual phone number (country code + number, no spaces or dashes) -->
+    <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Growfood!%20I%20would%20like%20to%20know%20more%20about%20your%20vegetables." 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       title="Chat on WhatsApp">
+        <div class="whatsapp-pulse"></div>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
