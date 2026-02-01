@@ -475,6 +475,33 @@
             transform: scale(1.15) rotate(-5deg);
         }
 
+        /* Product Real Images */
+        .product-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .product-img-hover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .product-card:hover .product-img:not(.product-img-hover) {
+            opacity: 0;
+        }
+
+        .product-card:hover .product-img-hover {
+            opacity: 1;
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
         .product-badge {
             position: absolute;
             top: 1rem;
@@ -827,6 +854,92 @@
             }
         }
 
+        /* Gallery Section */
+        .gallery {
+            padding: 8rem 5%;
+            background: var(--cream);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 250px);
+            gap: 1.25rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item-large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay span {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 968px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+
+            .gallery-item {
+                height: 200px;
+            }
+
+            .gallery-item-large {
+                grid-column: span 2;
+                grid-row: span 1;
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item-large {
+                grid-column: span 1;
+            }
+        }
+
         /* WhatsApp Floating Button */
         .whatsapp-float {
             position: fixed;
@@ -935,6 +1048,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#products">Products</a></li>
             <li><a href="#quality">Quality</a></li>
+            <li><a href="#gallery">Gallery</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="mobile-menu">
@@ -965,7 +1079,7 @@
             <div class="vegetable-circle">
                 <span class="vegetable-icon">🫑</span>
                 <span class="vegetable-icon">🥒</span>
-                <span class="vegetable-icon">🌶️</span>
+                <span class="vegetable-icon">🌱</span>
             </div>
         </div>
     </section>
@@ -1005,13 +1119,14 @@
         </div>
         <div class="products-grid">
             <div class="product-card scroll-reveal">
-                <div class="product-image">
-                    <span class="product-emoji">🫑</span>
+                <div class="product-image" style="background: none; padding: 0;">
+                    <img src="images/red-peppers-box.jpg" alt="Red Bell Peppers" class="product-img">
+                    <img src="images/yellow-peppers-box.jpg" alt="Yellow Bell Peppers" class="product-img product-img-hover">
                     <span class="product-badge">Premium</span>
                 </div>
                 <div class="product-content">
-                    <h3>Coloured Bell Peppers</h3>
-                    <p>Vibrant red, yellow, and orange bell peppers with exceptional sweetness and crunch. Perfect for salads, stir-fries, and gourmet dishes.</p>
+                    <h3>Red & Yellow Bell Peppers</h3>
+                    <p>Vibrant red and yellow bell peppers with exceptional sweetness and crunch. Perfect for salads, stir-fries, and gourmet dishes.</p>
                     <div class="product-features">
                         <span class="product-feature">Sweet & Crisp</span>
                         <span class="product-feature">Vitamin Rich</span>
@@ -1020,8 +1135,9 @@
                 </div>
             </div>
             <div class="product-card scroll-reveal">
-                <div class="product-image">
-                    <span class="product-emoji">🌶️</span>
+                <div class="product-image" style="background: none; padding: 0;">
+                    <img src="images/Capsicum_Green.webp" alt="Green Capsicum" class="product-img">
+                    <img src="images/Capsicum_Green.webp" alt="Green Capsicum" class="product-img product-img-hover">
                     <span class="product-badge">Fresh Daily</span>
                 </div>
                 <div class="product-content">
@@ -1035,8 +1151,9 @@
                 </div>
             </div>
             <div class="product-card scroll-reveal">
-                <div class="product-image">
-                    <span class="product-emoji">🥒</span>
+                <div class="product-image" style="background: none; padding: 0;">
+                    <img src="images/Cucumber_1.jpeg" alt="Cucumbers" class="product-img">
+                    <img src="images/Cucumber_2.jpeg" alt="Cucumbers" class="product-img product-img-hover">
                     <span class="product-badge">Hydrating</span>
                 </div>
                 <div class="product-content">
@@ -1083,6 +1200,47 @@
         </div>
     </section>
 
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="section-header scroll-reveal">
+            <span class="section-tag">Our Harvest</span>
+            <h2>Fresh From Our Polyhouse</h2>
+            <p>Take a look at our premium bell peppers, freshly harvested and ready for delivery.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item gallery-item-large scroll-reveal">
+                <img src="images/red-peppers-bulk.jpg" alt="Fresh Red Bell Peppers">
+                <div class="gallery-overlay">
+                    <span>Red Bell Peppers</span>
+                </div>
+            </div>
+            <div class="gallery-item scroll-reveal">
+                <img src="images/yellow-peppers-spread.jpg" alt="Yellow Bell Peppers">
+                <div class="gallery-overlay">
+                    <span>Yellow Bell Peppers</span>
+                </div>
+            </div>
+            <div class="gallery-item scroll-reveal">
+                <img src="images/red-peppers-box-2.jpg" alt="Packed Red Peppers">
+                <div class="gallery-overlay">
+                    <span>Ready to Ship</span>
+                </div>
+            </div>
+            <div class="gallery-item scroll-reveal">
+                <img src="images/yellow-boxes.jpg" alt="Yellow Pepper Boxes">
+                <div class="gallery-overlay">
+                    <span>Bulk Orders</span>
+                </div>
+            </div>
+            <div class="gallery-item scroll-reveal">
+                <img src="images/red-boxes.jpg" alt="Red Pepper Boxes">
+                <div class="gallery-overlay">
+                    <span>Fresh Harvest</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Location Section -->
     <section class="location" id="contact">
         <div class="location-wrapper">
@@ -1094,28 +1252,28 @@
                         <div class="contact-icon">📍</div>
                         <div class="contact-details">
                             <h4>Farm Location</h4>
-                            <span>[Your Farm Address]<br>District, State - PIN Code</span>
+                            <span>M/s. Growfood, 13SD, Jankidaswala, Suratgarh<br>Sri Ganganagar, Rajasthan - 335804</span>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">📞</div>
                         <div class="contact-details">
                             <h4>Phone</h4>
-                            <span>+91 XXXXX XXXXX</span>
+                            <span>+91 9413609351</span>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">💬</div>
                         <div class="contact-details">
                             <h4>WhatsApp</h4>
-                            <span><a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Growfood!%20I%20would%20like%20to%20know%20more%20about%20your%20vegetables." style="color: #25D366; text-decoration: none; font-weight: 600;">Chat with us →</a></span>
+                            <span><a href="https://wa.me/919413609351?text=Hi%20Growfood!%20I%20would%20like%20to%20know%20more%20about%20your%20vegetables." style="color: #25D366; text-decoration: none; font-weight: 600;">Chat with us →</a></span>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-icon">✉️</div>
                         <div class="contact-details">
                             <h4>Email</h4>
-                            <span>contact@growfood.in</span>
+                            <span>gargmukul66@gmail.com</span>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -1155,13 +1313,14 @@
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#products">Our Products</a></li>
                     <li><a href="#quality">Quality Promise</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-links">
                 <h4>Products</h4>
                 <ul>
-                    <li><a href="#products">Bell Peppers</a></li>
+                    <li><a href="#products">Red & Yellow Bell Peppers</a></li>
                     <li><a href="#products">Green Capsicum</a></li>
                     <li><a href="#products">Cucumbers</a></li>
                     <li><a href="#products">Coming Soon...</a></li>
@@ -1169,18 +1328,13 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <span>© 2025 Growfood. All rights reserved.</span>
+            <span>© 2026 Growfood. All rights reserved.</span>
             <div class="footer-social">
-                <a href="#" title="Facebook">f</a>
-                <a href="#" title="Instagram">ig</a>
-                <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Growfood!" target="_blank" rel="noopener noreferrer" title="WhatsApp" style="background: #25D366;">wa</a>
+                <a href="https://wa.me/919413609351?text=Hi%20Growfood!" target="_blank" rel="noopener noreferrer" title="WhatsApp" style="background: #25D366;">wa</a>
             </div>
         </div>
     </footer>
-
-    <!-- WhatsApp Floating Button -->
-    <!-- Replace 91XXXXXXXXXX with actual phone number (country code + number, no spaces or dashes) -->
-    <a href="https://wa.me/91XXXXXXXXXX?text=Hi%20Growfood!%20I%20would%20like%20to%20know%20more%20about%20your%20vegetables." 
+    <a href="https://wa.me/919413609351?text=Hi%20Growfood!%20I%20would%20like%20to%20know%20more%20about%20your%20vegetables." 
        class="whatsapp-float" 
        target="_blank" 
        rel="noopener noreferrer"
